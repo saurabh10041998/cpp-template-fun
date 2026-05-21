@@ -1,0 +1,107 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'build-server', defaultValue: '', description: 'IP address of the build server (required)')
+        string(name: 'root-base', defaultValue: 'local/saushind', description: 'Base folder on the build server')
+        choice(name: 'project', choices: ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'], description: 'Project to build and test')
+    }
+
+    environment {
+        REPO_URL = 'https://github.com/saurabh10041998/cpp-template-fun.git'
+        REPO_DIR = 'cpp-template-fun'
+    }
+
+    stages {
+        stage('Validate Parameters') {
+            steps {
+                script {
+                    if (!params['build-server']?.trim()) {
+                        error("Parameter 'build-server' is required but was not provided.")
+                    }
+                }
+            }
+        }
+
+        stage('build') {
+            steps {
+                sshagent(credentials: ['my-build-user']) {
+                    script {
+                        def buildServer = params['build-server']
+                        def rootBase    = params['root-base']
+                        def project     = params['project']
+                        def cmakeFlag   = "ENABLE_${project.toUpperCase()}"
+
+                        def buildScript = """
+                            set -e
+
+                            cd ~/${rootBase}
+
+                            if [ ! -d "${REPO_DIR}" ]; then
+                                git clone ${REPO_URL}
+                            fi
+
+                            cd ${REPO_DIR}
+                            export CPP_TEMPLATE_FUN_DIR=\$(pwd)
+                            echo "Project root: \$CPP_TEMPLATE_FUN_DIR"
+
+                            git pull
+
+                            make prepare
+
+                            cd build
+                            cmake .. -D${cmakeFlag}=ON
+                            cmake --build .
+                        """
+
+                        def result = sh(
+                            script: "ssh -o StrictHostKeyChecking=no ${buildServer} '${buildScript}'",
+                            returnStatus: true
+                        )
+
+                        if (result != 0) {
+                            error("Build stage failed: CMake configuration or compilation error on ${buildServer}")
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('test') {
+            steps {
+                sshagent(credentials: ['my-build-user']) {
+                    script {
+                        def buildServer = params['build-server']
+                        def rootBase    = params['root-base']
+                        def project     = params['project']
+
+                        def testScript = """
+                            set -e
+
+                            cd ~/${rootBase}/${REPO_DIR}/build
+                            ./${project}/${project}
+                        """
+
+                        def result = sh(
+                            script: "ssh -o StrictHostKeyChecking=no ${buildServer} '${testScript}'",
+                            returnStatus: true
+                        )
+
+                        if (result != 0) {
+                            error("Test stage failed: executable './${project}/${project}' exited with non-zero status")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully: project '${params.project}' built and tested on ${params['build-server']}."
+        }
+        failure {
+            echo "Pipeline failed. Check the stage logs above for details."
+        }
+    }
+}

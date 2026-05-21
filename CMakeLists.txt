@@ -6,4 +6,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_subdirectory(c1)
+option(ENABLE_C1 "Enable c1 executable" OFF)
+option(ENABLE_C2 "Enable c2 executable" OFF)
+
+if(ENABLE_C1)
+	add_subdirectory(c1)
+endif()
+if(ENABLE_C2)
+	add_subdirectory(c2)
+endif()

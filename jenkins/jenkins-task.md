@@ -1,0 +1,31 @@
+# tasks
+- Jenkins should execute the pipeline in two sequential stage "build" and "test"
+- For "build" stage
+    - Jenkins should use the ssh-agent credentials with id "my-build-user"
+    - Jenkins login to build server with IP given by parameter "build-server" (make it required)
+    - It should cd to folder location given by parameter "root-base" (default to "local/saushind")
+    - Check if cpp-template-fun directory present
+        - If not present, clone it from https://github.com/saurabh10041998/cpp-template-fun.git
+    - cd to cpp-template-fun, also record the location of cpp-template-fun in environment variable
+    - perform git pull
+    - execute make prepare
+    - cd to build directory
+    - Check "project" parameter (default to "c1")
+        - if it is "c1", then execute "cmake .. -DENABLE_C1=ON"
+        - if it is "c2", then execute "cmake .. -DENABLE_C2=ON"
+        - and so on till c10
+    - Build using "cmake --build ."
+    - if compilation / cmake configuration fails, report Error else mark this stage success
+
+- For "test" stage
+    - Jenkins should use the ssh-agent credentials with id "my-build-user"
+    - Jenkins login to build server with IP given by parameter "build-server" (make it required)
+    - cd to cpp-template-fun folder location
+    - cd to build directory
+    - - Check "project" parameter (default to "c1")
+        - if it is "c1", then execute "./c1/c1"
+        - if it is "c2", then execute "./c2/c2"
+        - and so on till c10
+    - If run successfully, then mark this stage success
+
+- If both stages completed, mark pipeline success.  
