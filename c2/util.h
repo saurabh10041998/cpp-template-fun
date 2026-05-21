@@ -25,3 +25,8 @@ template<typename T1, typename T2, typename TResult>
 TResult product3(T1 a, T2 b) {
     return a * b;
 }
+
+template<typename TResult, typename T1, typename T2>
+TResult product4(T1 a, T2 b) {
+    return a * b;
+}

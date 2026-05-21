@@ -22,6 +22,9 @@ int main() {
     auto pro2 = product3<int, double, double>(4, 6.2); // This works with explicit template parameters, no loss of info
     std::cout << "Product of 4 and 6.2: " << pro2 << std::endl;
 
+    auto pro3 = product4<double>(4, 6.2); // explict type only for return type, no loss of info
+    std::cout << "Product of 4 and 6.2: " << pro3 << std::endl;
+
     return 0;
 
 }
