@@ -12,6 +12,11 @@ T square(T x) {
     return x * x;
 }
 
+template <typename T>
+constexpr T square_constexpr(T x) {
+    return x * x;
+}
+
 template<typename T>
 T product1(T a, T b) {
     return a * b;

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cxxabi.h>
 
+#include "util.h"
+
 template<typename T>
 void foo(T a) {
     int status;
@@ -37,4 +39,7 @@ int main() {
     // function decays to pointer
     foo(A);
     foo(B);
+
+    auto y = square_constexpr(5);   // evaluated at compile time
+    std::cout << y << std::endl;
 }
