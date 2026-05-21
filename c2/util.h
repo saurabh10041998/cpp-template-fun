@@ -16,6 +16,6 @@ T product1(T a, T b) {
 }
 
 template<typename T1, typename T2>
-T1 product1(T1 a, T2 b) {
+T1 product2(T1 a, T2 b) {
     return a * b;
 }
