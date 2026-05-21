@@ -25,6 +25,8 @@ int main() {
     auto pro3 = product4<double>(4, 6.2); // explict type only for return type, no loss of info
     std::cout << "Product of 4 and 6.2: " << pro3 << std::endl;
 
+    auto pro4 = product5(4, 6.2); // c++11 decltype, no loss of info
+    std::cout << "Product of 4 and 6.2: " << pro4 << std::endl;
     return 0;
 
 }

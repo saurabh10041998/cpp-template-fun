@@ -30,3 +30,9 @@ template<typename TResult, typename T1, typename T2>
 TResult product4(T1 a, T2 b) {
     return a * b;
 }
+
+// c++11 decltype
+template<typename T1, typename T2>
+auto product5(T1 a, T2 b) -> decltype(a * b) {
+    return a * b;
+}
