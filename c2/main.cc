@@ -16,9 +16,11 @@ int main() {
 
     // auto pro1 = product1(4, 6.2); This fails in template deduction
 
-    auto pro1 = product2(4, 6.2); // This works with explicit template parameters
+    auto pro1 = product2(4, 6.2); // This works with explicit template parameters, loss of info
     std::cout << "Product of 4 and 6.2: " << pro1 << std::endl;
 
+    auto pro2 = product3<int, double, double>(4, 6.2); // This works with explicit template parameters, no loss of info
+    std::cout << "Product of 4 and 6.2: " << pro2 << std::endl;
 
     return 0;
 
