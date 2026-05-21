@@ -3,6 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'build-server', defaultValue: '', description: 'IP address of the build server (required)')
+        string(name: 'user', defaultValue: '', description: 'SSH user to login to the build server (required)')
         string(name: 'root-base', defaultValue: 'local/saushind', description: 'Base folder on the build server')
         choice(name: 'project', choices: ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10'], description: 'Project to build and test')
     }
@@ -19,6 +20,9 @@ pipeline {
                     if (!params['build-server']?.trim()) {
                         error("Parameter 'build-server' is required but was not provided.")
                     }
+                    if (!params['user']?.trim()) {
+                        error("Parameter 'user' is required but was not provided.")
+                    }
                 }
             }
         }
@@ -28,6 +32,7 @@ pipeline {
                 sshagent(credentials: ['my-build-user']) {
                     script {
                         def buildServer = params['build-server']
+                        def user        = params['user']
                         def rootBase    = params['root-base']
                         def project     = params['project']
                         def cmakeFlag   = "ENABLE_${project.toUpperCase()}"
@@ -55,7 +60,7 @@ pipeline {
                         """
 
                         def result = sh(
-                            script: "ssh -o StrictHostKeyChecking=no ${buildServer} '${buildScript}'",
+                            script: "ssh -o StrictHostKeyChecking=no ${user}@${buildServer} '${buildScript}'",
                             returnStatus: true
                         )
 
@@ -72,6 +77,7 @@ pipeline {
                 sshagent(credentials: ['my-build-user']) {
                     script {
                         def buildServer = params['build-server']
+                        def user        = params['user']
                         def rootBase    = params['root-base']
                         def project     = params['project']
 
@@ -83,7 +89,7 @@ pipeline {
                         """
 
                         def result = sh(
-                            script: "ssh -o StrictHostKeyChecking=no ${buildServer} '${testScript}'",
+                            script: "ssh -o StrictHostKeyChecking=no ${user}@${buildServer} '${testScript}'",
                             returnStatus: true
                         )
 

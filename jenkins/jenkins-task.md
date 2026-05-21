@@ -2,7 +2,7 @@
 - Jenkins should execute the pipeline in two sequential stage "build" and "test"
 - For "build" stage
     - Jenkins should use the ssh-agent credentials with id "my-build-user"
-    - Jenkins login to build server with IP given by parameter "build-server" (make it required)
+    - Jenkins login to build server with IP given by parameter "build-server" (make it required) and user given by parameter user (make it required)
     - It should cd to folder location given by parameter "root-base" (default to "local/saushind")
     - Check if cpp-template-fun directory present
         - If not present, clone it from https://github.com/saurabh10041998/cpp-template-fun.git
@@ -19,7 +19,7 @@
 
 - For "test" stage
     - Jenkins should use the ssh-agent credentials with id "my-build-user"
-    - Jenkins login to build server with IP given by parameter "build-server" (make it required)
+     - Jenkins login to build server with IP given by parameter "build-server" (make it required) and user given by parameter user (make it required)
     - cd to cpp-template-fun folder location
     - cd to build directory
     - - Check "project" parameter (default to "c1")
