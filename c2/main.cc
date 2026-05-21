@@ -33,6 +33,13 @@ int main() {
 
     auto pro6 = product7(4, 6.2); // common_type type trait, no loss of info
     std::cout << "Product of 4 and 6.2: " << pro6 << std::endl;
+
+    auto pro7 = product8(4, 6.2); // default template parameter for return type, no loss of info
+    std::cout << "Product of 4 and 6.2: " << pro7 << std::endl;
+
+    auto pro8 = product9(4, 6.2); // default template parameter for return type using common_type, no loss of info
+    std::cout << "Product of 4 and 6.2: " << pro8 << std::endl;
+
     return 0;
 
 }

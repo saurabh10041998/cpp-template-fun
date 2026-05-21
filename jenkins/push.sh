@@ -8,10 +8,8 @@
 # export PROJECT=c2
 
 
-commit_message=${1:?"Commit message is required as the first argument."}
-
 git add .
-git commit -m "$commit_message"
+git commit -m "cpp template udemy"
 git push -u origin HEAD
 
 # refactor this curl to use post data instead of query parameters for better security and readability

@@ -50,3 +50,13 @@ template<typename T1, typename T2>
 typename std::common_type<T1, T2>::type product7(T1 a, T2 b) {
     return a * b;
 }
+
+template<typename T1, typename T2, typename TResult = double>
+TResult product8(T1 a, T2 b) {
+    return a * b;
+}
+
+template <typename T1, typename T2, typename TResult = typename std::common_type<T1, T2>::type>
+TResult product9(T1 a, T2 b) {
+    return a * b;
+}
