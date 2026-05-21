@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 template <typename T>
 T max(T a, T b) {
     return (a > b) ? a : b;
@@ -34,5 +36,17 @@ TResult product4(T1 a, T2 b) {
 // c++11 decltype
 template<typename T1, typename T2>
 auto product5(T1 a, T2 b) -> decltype(a * b) {
+    return a * b;
+}
+
+// c++14 auto return type deduction
+template<typename T1, typename T2>
+auto product6(T1 a, T2 b) {
+    return a * b;
+}
+
+// common_type type trait
+template<typename T1, typename T2>
+std::common_type<T1, T2>::type product7(T1 a, T2 b) {
     return a * b;
 }

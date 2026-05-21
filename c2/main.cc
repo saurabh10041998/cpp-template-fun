@@ -27,6 +27,12 @@ int main() {
 
     auto pro4 = product5(4, 6.2); // c++11 decltype, no loss of info
     std::cout << "Product of 4 and 6.2: " << pro4 << std::endl;
+
+    auto pro5 = product6(4, 6.2); // c++14 auto return type deduction, no loss of info
+    std::cout << "Product of 4 and 6.2: " << pro5 << std::endl;
+
+    auto pro6 = product7(4, 6.2); // common_type type trait, no loss of info
+    std::cout << "Product of 4 and 6.2: " << pro6 << std::endl;
     return 0;
 
 }
