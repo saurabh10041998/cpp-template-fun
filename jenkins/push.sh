@@ -15,10 +15,10 @@ git commit -m "$commit_message"
 git push -u origin HEAD
 
 # refactor this curl to use post data instead of query parameters for better security and readability
-curl -X POST "${JENKINS_URL}/job/cpp-template-fun/buildWithParameters" \
+curl -X POST "${JENKINS_URL}/job/cpp-template-fun-udemy/buildWithParameters" \
   -u "admin:${TOKEN}" \
-  --data-urlencode "build-server=${BUILD_SERVER}" \
-  --data-urlencode "user=${USER}" \
-  --data-urlencode "project=${PROJECT}"
+  --data "build-server=${BUILD_SERVER}" \
+  --data "user=${USER}" \
+  --data "project=${PROJECT}"
 
 echo "Triggered Jenkins build for project ${PROJECT} on build server ${BUILD_SERVER} with user ${USER}."
