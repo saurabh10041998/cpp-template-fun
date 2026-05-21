@@ -1,5 +1,5 @@
 #include <iostream>
-#include "utils.h"
+#include "util.h"
 
 int main() {
     auto result1 = max(3, 7);
