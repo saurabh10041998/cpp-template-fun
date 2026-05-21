@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 template <typename T>
 T max(T a, T b) {
@@ -22,7 +23,7 @@ T* max(T* a, T* b) {
 // non template function for const char*
 const char* max(const char* a, const char* b) {
     std::cout << "Calling non-template max for const char*" << std::endl;
-    return (std::strcmp(a, b) > 0) ? a : b;
+    return (strcmp(a, b) > 0) ? a : b;
 }
 
 int main() {
