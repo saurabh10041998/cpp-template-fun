@@ -14,8 +14,9 @@ int main() {
     std::cout << "Square of 5: " << square1 << std::endl;
     std::cout << "Square of 2.5: " << square2 << std::endl;
 
-    auto pro1 = product1(4, 6.2);
+    // auto pro1 = product1(4, 6.2); This fails in template deduction
 
+    auto pro1 = product2(4, 6.2); // This works with explicit template parameters
     std::cout << "Product of 4 and 6.2: " << pro1 << std::endl;
 
 
