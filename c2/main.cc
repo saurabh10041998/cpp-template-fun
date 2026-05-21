@@ -1,8 +1,12 @@
 #include <iostream>
+#include <cxxabi.h>
 
 template<typename T>
 void foo(T a) {
-    std::cout << typeid(T).name() << std::endl;
+    int status;
+    char* typeName = abi::__cxa_demangle(typeid(T).name(), 0, 0, &status);
+    std::cout << (status == 0 ? typeName : typeid(T).name()) << std::endl;
+    free(typeName);
 }
 
 void A() {
