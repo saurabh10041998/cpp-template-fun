@@ -1,9 +1,5 @@
 #include <iostream>
-
-template <typename T>
-T max(T a, T b) {
-    return (a > b) ? a : b;
-}
+#include "utils.h"
 
 int main() {
     auto result1 = max(3, 7);
@@ -11,6 +7,12 @@ int main() {
 
     std::cout << "Max of 3 and 7: " << result1 << std::endl;
     std::cout << "Max of 3.5 and 2.1: " << result2 << std::endl;
+
+    auto square1 = square(5);
+    auto square2 = square(2.5);
+
+    std::cout << "Square of 5: " << square1 << std::endl;
+    std::cout << "Square of 2.5: " << square2 << std::endl;
 
     return 0;
 
