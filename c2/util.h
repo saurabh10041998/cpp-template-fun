@@ -11,6 +11,6 @@ T square(T x) {
 }
 
 template<typename T>
-T product(T a, T b) {
+T product1(T a, T b) {
     return a * b;
 }
