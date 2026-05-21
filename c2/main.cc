@@ -40,6 +40,6 @@ int main() {
     foo(A);
     foo(B);
 
-    auto y = square_constexpr(5);   // evaluated at compile time
-    std::cout << y << std::endl;
+    auto res = square_constexpr(5);   // evaluated at compile time
+    std::cout << res << std::endl;
 }
