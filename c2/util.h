@@ -9,3 +9,8 @@ template <typename T>
 T square(T x) {
     return x * x;
 }
+
+template<typename T>
+T product(T a, T b) {
+    return a * b;
+}
