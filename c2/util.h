@@ -47,6 +47,6 @@ auto product6(T1 a, T2 b) {
 
 // common_type type trait
 template<typename T1, typename T2>
-std::common_type<T1, T2>::type product7(T1 a, T2 b) {
+typename std::common_type<T1, T2>::type product7(T1 a, T2 b) {
     return a * b;
 }
